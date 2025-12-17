@@ -1,0 +1,25 @@
+.sales-reports-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+.sales-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+.sales-card {
+  background: #181818;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.sales-card:hover {
+  background: #222;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}

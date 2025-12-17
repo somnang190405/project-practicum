@@ -1,0 +1,65 @@
+/* Container */
+.order-management-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.om-title { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 16px; }
+
+/* Card/Table */
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.om-table { width: 100%; overflow: hidden; }
+.om-row { 
+  display: grid; 
+  grid-template-columns: 1.2fr 1fr 1fr 0.8fr 0.8fr 1.4fr; 
+  gap: 12px; 
+  padding: 14px 16px; 
+  align-items: center;
+}
+.om-header { 
+  background: #f9fafb; 
+  border-bottom: 1px solid #e5e7eb; 
+  font-size: 12px; 
+  font-weight: 700; 
+  color: #6b7280; 
+}
+.om-row:not(.om-header) { border-top: 1px solid #f3f4f6; }
+.om-cell { color: #111827; font-size: 14px; }
+.om-cell.total { font-weight: 600; }
+.om-muted { color: #9ca3af; font-size: 12px; }
+
+/* Status badges */
+.status-badge { 
+  font-size: 12px; 
+  font-weight: 700; 
+  border-radius: 6px; 
+  padding: 4px 8px; 
+  display: inline-block; 
+}
+.status-badge.delivered { background: #dcfce7; color: #166534; }
+.status-badge.shipped { background: #dbeafe; color: #1e40af; }
+.status-badge.pending { background: #fef3c7; color: #92400e; }
+.status-badge.cancelled { background: #fee2e2; color: #7f1d1d; }
+
+/* Buttons */
+.btn { 
+  border: 1px solid transparent; 
+  border-radius: 8px; 
+  padding: 8px 12px; 
+  font-size: 12px; 
+  font-weight: 600; 
+  cursor: pointer; 
+  transition: all .15s ease; 
+  margin-right: 8px; 
+}
+.btn.primary { background: #2563eb; color: #fff; }
+.btn.primary:hover { background: #1d4ed8; }
+.btn.success { background: #16a34a; color: #fff; }
+.btn.success:hover { background: #15803d; }
+.btn.danger { background: #ef4444; color: #fff; }
+.btn.danger:hover { background: #dc2626; }
