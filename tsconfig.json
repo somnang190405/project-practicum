@@ -1,4 +1,7 @@
 {
+  "include": [
+    "src"
+  ],
   "compilerOptions": {
     "target": "ES2022",
     "experimentalDecorators": true,
@@ -15,15 +18,15 @@
       "vite/client",
       "react"
     ],
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "isolatedModules": true,
     "moduleDetection": "force",
     "allowJs": true,
     "jsx": "react-jsx",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
-        "./*"
+        "src/*"
       ]
     },
     "allowImportingTsExtensions": true,
@@ -31,5 +34,11 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "legacy",
+    "scripts"
+  ]
 }

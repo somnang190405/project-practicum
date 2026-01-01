@@ -12,7 +12,7 @@ export const AdminLayout: React.FC = () => {
       <aside className="admin-sidebar light">
         <div className="brand">
           <span className="brand-icon">🛡️</span>
-          <span className="brand-name">TinhMe Admin Console</span>
+          <span className="brand-name">TinhMe Dashboard</span>
         </div>
         <nav className="side-nav">
           <button className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>

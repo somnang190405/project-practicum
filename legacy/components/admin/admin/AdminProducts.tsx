@@ -8,6 +8,14 @@ const AdminProducts: React.FC = () => {
   const [isEditing, setIsEditing] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<Partial<Product>>({});
 
+  const parseColors = (raw: string): string[] => {
+    return (raw || '')
+      .split(',')
+      .map((c) => c.trim())
+      .filter(Boolean)
+      .slice(0, 12);
+  };
+
   useEffect(() => {
     loadProducts();
   }, []);
@@ -25,35 +33,51 @@ const AdminProducts: React.FC = () => {
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const promotionPercent = Math.max(0, Math.min(100, Number((editForm as any).promotionPercent) || 0));
+    const colors = parseColors(String((editForm as any).colorsRaw || '') || '').length
+      ? parseColors(String((editForm as any).colorsRaw || '') || '')
+      : (Array.isArray((editForm as any).colors) ? ((editForm as any).colors as string[]) : []);
+
+    const normalized: Partial<Product> = {
+      ...editForm,
+      promotionPercent,
+      colors,
+    };
+
     if (isEditing === 'new') {
       if (imageFile) {
         await createProductWithUpload({
-          name: editForm.name!,
-          price: editForm.price!,
-          category: editForm.category!,
-          description: editForm.description || '',
-          stock: editForm.stock || 0,
-          rating: editForm.rating || 0,
+          name: normalized.name!,
+          price: normalized.price!,
+          category: normalized.category!,
+          description: normalized.description || '',
+          stock: normalized.stock || 0,
+          rating: normalized.rating || 0,
+          promotionPercent: (normalized as any).promotionPercent,
+          colors: (normalized as any).colors,
         }, imageFile);
       } else {
-        await createProduct(editForm as Omit<Product, 'id'>);
+        await createProduct(normalized as Omit<Product, 'id'>);
       }
     } else if (isEditing) {
       // If a new image file is provided during edit, upload and set new URL
       if (imageFile) {
         // Create a temporary product to leverage upload helper, then update image only
         const urlProduct = await createProductWithUpload({
-          name: editForm.name || 'temp',
-          price: editForm.price || 0,
-          category: editForm.category || 'uncategorized',
-          description: editForm.description || '',
-          stock: editForm.stock || 0,
-          rating: editForm.rating || 0,
+          name: normalized.name || 'temp',
+          price: normalized.price || 0,
+          category: normalized.category || 'uncategorized',
+          description: normalized.description || '',
+          stock: normalized.stock || 0,
+          rating: normalized.rating || 0,
+          promotionPercent: (normalized as any).promotionPercent,
+          colors: (normalized as any).colors,
         }, imageFile);
         await deleteProduct(urlProduct.id);
-        await updateProduct(isEditing, { ...editForm, image: urlProduct.image });
+        await updateProduct(isEditing, { ...normalized, image: urlProduct.image });
       } else {
-        await updateProduct(isEditing, editForm);
+        await updateProduct(isEditing, normalized);
       }
     }
     setIsEditing(null);
@@ -102,6 +126,22 @@ const AdminProducts: React.FC = () => {
                   required
                 />
               </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <input
+                  type="number"
+                  placeholder="Promotion % (0-100)"
+                  className="w-full border p-2 rounded"
+                  value={(editForm as any).promotionPercent ?? ''}
+                  onChange={e => setEditForm({ ...editForm, promotionPercent: Math.max(0, Math.min(100, Number(e.target.value || 0))) } as any)}
+                />
+                <input
+                  placeholder="Colors (comma separated)"
+                  className="w-full border p-2 rounded"
+                  value={String((editForm as any).colorsRaw ?? ((editForm as any).colors || []).join(', '))}
+                  onChange={e => setEditForm({ ...editForm, colorsRaw: e.target.value } as any)}
+                />
+              </div>
               <input
                 placeholder="Category"
                 className="w-full border p-2 rounded"
@@ -134,7 +174,9 @@ const AdminProducts: React.FC = () => {
               />
               <div className="flex gap-2 justify-end mt-4">
                 <button type="button" onClick={() => setIsEditing(null)} className="px-4 py-2 text-gray-600">Cancel</button>
-                <button type="submit" className="px-4 py-2 bg-black text-white rounded">Save</button>
+                <button type="submit" className="px-4 py-2 bg-black text-white rounded">
+                  {isEditing === 'new' ? 'Add Product' : 'Update'}
+                </button>
               </div>
             </form>
           </div>
