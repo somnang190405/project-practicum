@@ -1,10 +1,10 @@
 /* Container */
 .order-management-container {
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 28px 24px;
 }
-.om-title { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 16px; }
+.om-title { font-size: 26px; font-weight: 700; color: #111827; margin-bottom: 18px; }
 
 /* Card/Table */
 .card {
@@ -16,20 +16,21 @@
 .om-table { width: 100%; overflow: hidden; }
 .om-row { 
   display: grid; 
-  grid-template-columns: 1.2fr 1fr 1fr 0.8fr 0.8fr 1.4fr; 
-  gap: 12px; 
-  padding: 14px 16px; 
+  grid-template-columns: 2fr 1.2fr 1.6fr 1fr 1fr 1.6fr; 
+  gap: 16px; 
+  padding: 16px 18px; 
   align-items: center;
 }
 .om-header { 
   background: #f9fafb; 
   border-bottom: 1px solid #e5e7eb; 
-  font-size: 12px; 
+  font-size: 13px; 
   font-weight: 700; 
   color: #6b7280; 
 }
 .om-row:not(.om-header) { border-top: 1px solid #f3f4f6; }
-.om-cell { color: #111827; font-size: 14px; }
+.om-row:nth-child(odd):not(.om-header) { background: #fcfdfe; }
+.om-cell { color: #111827; font-size: 15px; }
 .om-cell.total { font-weight: 600; }
 .om-muted { color: #9ca3af; font-size: 12px; }
 
@@ -37,8 +38,8 @@
 .status-badge { 
   font-size: 12px; 
   font-weight: 700; 
-  border-radius: 6px; 
-  padding: 4px 8px; 
+  border-radius: 8px; 
+  padding: 5px 10px; 
   display: inline-block; 
 }
 .status-badge.delivered { background: #dcfce7; color: #166534; }
@@ -49,9 +50,9 @@
 /* Buttons */
 .btn { 
   border: 1px solid transparent; 
-  border-radius: 8px; 
-  padding: 8px 12px; 
-  font-size: 12px; 
+  border-radius: 10px; 
+  padding: 9px 12px; 
+  font-size: 13px; 
   font-weight: 600; 
   cursor: pointer; 
   transition: all .15s ease; 

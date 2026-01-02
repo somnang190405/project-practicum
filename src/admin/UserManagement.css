@@ -1,29 +1,30 @@
 /* Container */
 .user-management-container {
-  max-width: 900px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 28px 24px;
 }
-.um-title { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 16px; }
+.um-title { font-size: 26px; font-weight: 700; color: #111827; margin-bottom: 18px; }
 
 /* Table */
 .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }
 .um-table { width: 100%; overflow: hidden; }
-.um-row { display: grid; grid-template-columns: 1.4fr 1.6fr 0.8fr 0.6fr; gap: 12px; padding: 14px 16px; align-items: center; }
-.um-header { background: #f9fafb; border-bottom: 1px solid #e5e7eb; font-size: 12px; font-weight: 700; color: #6b7280; }
+.um-row { display: grid; grid-template-columns: 2.2fr 2.2fr 0.9fr 0.7fr; gap: 16px; padding: 16px 18px; align-items: center; }
+.um-header { background: #f9fafb; border-bottom: 1px solid #e5e7eb; font-size: 13px; font-weight: 700; color: #6b7280; }
 .um-row:not(.um-header) { border-top: 1px solid #f3f4f6; }
-.um-cell { color: #111827; font-size: 14px; }
+.um-row:nth-child(odd):not(.um-header) { background: #fcfdfe; }
+.um-cell { color: #111827; font-size: 15px; }
 .um-cell.user { display: flex; align-items: center; gap: 12px; }
-.avatar { width: 32px; height: 32px; border-radius: 9999px; object-fit: cover; }
+.avatar { width: 36px; height: 36px; border-radius: 9999px; object-fit: cover; }
 .name { font-weight: 600; }
 
 /* Role badge */
-.role-badge { font-size: 12px; font-weight: 700; border-radius: 6px; padding: 4px 8px; display: inline-block; }
+.role-badge { font-size: 12px; font-weight: 700; border-radius: 8px; padding: 5px 10px; display: inline-block; }
 .role-badge.admin { background: #ede9fe; color: #6d28d9; }
 .role-badge.customer { background: #e5e7eb; color: #374151; }
 
 /* Actions */
-.icon-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid #e5e7eb; background: #fff; color: #111827; padding: 6px 8px; border-radius: 8px; cursor: pointer; transition: all .15s; }
+.icon-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid #e5e7eb; background: #fff; color: #111827; padding: 8px 10px; border-radius: 10px; cursor: pointer; transition: all .15s; }
 .icon-btn:hover { background: #f9fafb; }
 .icon-btn.danger { border-color: #fecaca; color: #b91c1c; }
 .icon-btn.danger:hover { background: #fee2e2; }

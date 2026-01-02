@@ -50,7 +50,7 @@ const Cart = ({ cart, updateCartQty, removeFromCart, user, setView, notify }: Pr
               <div className="flex items-start justify-between gap-8">
                 <div className="flex items-start gap-6 min-w-0">
                   <div className="w-20 h-20 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0">
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" onError={(e)=>{(e.currentTarget as HTMLImageElement).src='https://via.placeholder.com/80x80?text=Image';}} />
                   </div>
                   <div className="min-w-0">
                     <h3 className="font-semibold text-lg text-gray-900 truncate">{item.name}</h3>
@@ -58,7 +58,7 @@ const Cart = ({ cart, updateCartQty, removeFromCart, user, setView, notify }: Pr
 
                     <div className="mt-4 inline-flex items-center border border-gray-200 rounded-lg overflow-hidden bg-white">
                       <button
-                        onClick={() => updateCartQty(item.id, item.quantity - 1)}
+                        onClick={() => updateCartQty(item.id, Math.max(1, item.quantity - 1))}
                         className="px-3 py-2 hover:bg-gray-50 transition-colors"
                         aria-label="Decrease quantity"
                       >
@@ -66,7 +66,7 @@ const Cart = ({ cart, updateCartQty, removeFromCart, user, setView, notify }: Pr
                       </button>
                       <span className="px-4 text-sm font-medium w-10 text-center select-none">{item.quantity}</span>
                       <button
-                        onClick={() => updateCartQty(item.id, item.quantity + 1)}
+                        onClick={() => updateCartQty(item.id, Math.max(1, item.quantity + 1))}
                         className="px-3 py-2 hover:bg-gray-50 transition-colors"
                         aria-label="Increase quantity"
                       >

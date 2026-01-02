@@ -566,8 +566,21 @@ const App: React.FC = () => {
   // Router-aware scaffold to hide Navbar on admin and control layout padding
   const RouteScaffold: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const location = useLocation();
+    const navigate = useNavigate();
     const isAdminRoute = location.pathname.startsWith("/admin");
     const isFullBleedRoute = ["/", "/home"].includes(location.pathname);
+
+    // Read one-time toast from navigation state and clear it
+    React.useEffect(() => {
+      const st = (location.state as any) || null;
+      const toastPayload = st && st.toast;
+      if (toastPayload) {
+        const { message = 'Success', type = 'success' } = toastPayload || {};
+        showToast(String(message), type === 'error' ? 'error' : 'success');
+        // Clear state so toast doesn't repeat on navigation history
+        navigate(location.pathname + location.search, { replace: true, state: null });
+      }
+    }, [location.pathname, location.search, location.state]);
     return (
       <>
         {!isAdminRoute && (
@@ -665,6 +678,7 @@ const App: React.FC = () => {
           isOpen={showAuthModal}
           onClose={() => setShowAuthModal(false)}
           onAuth={handleAuth}
+          loading={authLoading}
         />
       </div>
     </CartProvider>

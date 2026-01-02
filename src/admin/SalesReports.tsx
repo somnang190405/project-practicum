@@ -103,7 +103,7 @@ const SalesReports: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+    <div style={{ maxWidth: 1400, margin: '0 auto' }}>
       <div className="topbar">
         <div>
           <div className="page-title">Sales Reports</div>

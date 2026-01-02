@@ -145,7 +145,7 @@ const PaymentPage: React.FC<Props> = ({ user, onRequireAuth }) => {
       hydrateCart([]);
       void clearUserCart(user.id).catch(() => {});
 
-      navigate('/orders');
+      navigate('/orders', { state: { toast: { message: 'Payment successful', type: 'success' } } });
     } finally {
       setBusy(false);
     }

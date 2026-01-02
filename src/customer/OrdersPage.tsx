@@ -131,7 +131,7 @@ const OrdersPage: React.FC<Props> = ({ user, onRequireAuth }) => {
                   </div>
                   <div className="w-24 h-24 bg-gray-50 rounded overflow-hidden flex items-center justify-center">
                     {img ? (
-                      <img src={img} alt={name} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+                      <img src={img} alt={name} className="w-full h-full object-cover" loading="lazy" decoding="async" onError={(e)=>{(e.currentTarget as HTMLImageElement).style.visibility='hidden';}} />
                     ) : (
                       <div className="text-gray-300 text-sm">No image</div>
                     )}

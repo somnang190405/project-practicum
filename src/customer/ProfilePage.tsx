@@ -125,10 +125,16 @@ const ProfilePage: React.FC<{ onRequireAuth?: (redirectTo: string) => void }> = 
         phoneNumber: form.phoneNumber,
         dateOfBirth: parseDobToISO(form.dateOfBirth),
       });
-      setSavedMsg('Profile saved successfully');
+      setSavedMsg('Profile updated successfully! Redirecting…');
       // refresh local user object
       const refreshed = await getUserFromFirestore(user.id);
       if (refreshed) setUser(refreshed);
+      // Navigate to Orders with a success toast shortly after success
+      window.setTimeout(() => {
+        try {
+          navigate('/orders', { state: { toast: { message: 'Profile updated successfully', type: 'success' } } });
+        } catch {}
+      }, 900);
     } catch (e) {
       setSavedMsg('Failed to save profile');
     } finally {
